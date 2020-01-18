@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import iberia.AerolineaIberia;
-import iberia.VueloDTO;
+import iberia.Vuelo;
 
 public class IberiaService extends Thread {
 
@@ -34,9 +34,8 @@ public class IberiaService extends Thread {
 			String data[] = this.in.readUTF().split(";");
 			String origen = data[0];
 			String destino = data[1];
-			String fechaIda = data[2];
-			String fechaVuelta = data[3];
-			int asientos = Integer.parseInt(data[4]);
+			String fecha = data[2];
+			int asientos = Integer.parseInt(data[3]);
 			
 			// Read request from the client
 			//String data = this.in.readUTF();
@@ -44,7 +43,7 @@ public class IberiaService extends Thread {
 			System.out.println("   - IberiaService - Received data from '" + tcpSocket.getInetAddress().getHostAddress()
 					+ ":" + tcpSocket.getPort() + "' -> '" + data + "'");
 			
-			VueloDTO vuelos = fDb.buscarVuelo(destino, origen, fechaIda, fechaVuelta, asientos);
+			Vuelo vuelos = fDb.buscarVuelo(destino, origen, fecha, asientos);
 			String r = "";
 			r = r + vuelos.toString() + "#";
 			

@@ -2,12 +2,13 @@ package iberia;
 
 import java.util.ArrayList;
 
-public class AerolineaIberia implements IGatewayAerolinea {
+public class AerolineaIberia implements IAerolineaIberia {
 
-	private ArrayList<VueloDTO> vuelos = new ArrayList<VueloDTO>();
-	VueloDTO v1 = new VueloDTO();
-	VueloDTO v2 = new VueloDTO();
-	VueloDTO v3 = new VueloDTO();
+	private ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+	Vuelo v1 = new Vuelo();
+	Vuelo v2 = new Vuelo();
+	Vuelo v3 = new Vuelo();
+	Vuelo v4 = new Vuelo();
 
 	public AerolineaIberia() {
 
@@ -16,7 +17,7 @@ public class AerolineaIberia implements IGatewayAerolinea {
 
 
 	@Override
-	public ArrayList<VueloDTO> getAllVuelos() {
+	public ArrayList<Vuelo> getAllVuelos() {
 		// Vuelo 1
 				v1.setAeropuertoOrigen("BIO");
 				v1.setAeropuertoDestino("BCN");
@@ -47,7 +48,17 @@ public class AerolineaIberia implements IGatewayAerolinea {
 				v3.setNumAsientos(530);
 				vuelos.add(v3);
 				
-		for (VueloDTO vuelo : vuelos) {
+				// Vuelo 4
+				v4.setAeropuertoOrigen("BIO");
+				v4.setAeropuertoDestino("MAD");
+				v4.setFecha("20/01/19");
+				v4.setNomAerolinea("IB");
+				v4.setNumVuelo("IB256");
+				v4.setAsientosDisponibles(530);
+				v4.setNumAsientos(530);
+				vuelos.add(v4);
+				
+		for (Vuelo vuelo : vuelos) {
 			System.out.println("Aerolinea: " + vuelo.getNomAerolinea() + "\n Origen: " + vuelo.getAeropuertoOrigen()
 					+ "\n Destino: " + vuelo.getAeropuertoDestino());
 		}
@@ -56,31 +67,39 @@ public class AerolineaIberia implements IGatewayAerolinea {
 	}
 
 	@Override
-	public VueloDTO buscarVuelo(String aeropuertoDestino, String aeropuertoOrigen, String fechaIda, String fechaVuelta,
-			int asientos) {
+	public Vuelo buscarVuelo(String aeropuertoDestino, String aeropuertoOrigen, String fecha, int asientos) {
 		// TODO Auto-generated method stub
 		int i = 0;
-		VueloDTO vueloEncontrado = null;
+		Vuelo vueloEncontrado = null;
 		for(i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getAeropuertoDestino() == aeropuertoDestino && vuelos.get(i).getFecha() == fechaIda && vuelos.get(i).getNumAsientos() == asientos) {
+			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getAeropuertoDestino() == aeropuertoDestino && vuelos.get(i).getFecha() == fecha && vuelos.get(i).getAsientosDisponibles() >= asientos) {
 				vueloEncontrado = vuelos.get(i);
 			}
 			
 		}
+		System.out.println("Origen: " +vueloEncontrado.getAeropuertoOrigen() +" Destino: " +vueloEncontrado.getAeropuertoDestino() +" Numero de vuelo: " +vueloEncontrado.getNumVuelo() );
 		return vueloEncontrado;
 		
 	}
 
 	@Override
-	public ArrayList<VueloDTO> buscarVuelosDesdeOrigen(String aeropuertoOrigen, String fecha, int asientos) {
+	public ArrayList<Vuelo> buscarVuelosDesdeOrigen(String aeropuertoOrigen, String fecha, int asientos) {
 		// TODO Auto-generated method stub
-		ArrayList<VueloDTO> vuelosEncontrados = new ArrayList<VueloDTO>();
+		ArrayList<Vuelo> vuelosEncontrados = new ArrayList<Vuelo>();
 		int i;
 		for(i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getFecha() == fecha  ) {
+			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getFecha() == fecha &&vuelos.get(i).getAsientosDisponibles() >= asientos ) {
 				vuelosEncontrados.add(vuelos.get(i));
+				
 			}
+			
 		}
+		
+		for (int j = 0; j < vuelosEncontrados.size(); j++) {
+			System.out.println("Numero de vuelo: " +vuelosEncontrados.get(j).getNumVuelo());
+		}
+			
+		
 		
 		return vuelosEncontrados;
 	}
@@ -88,7 +107,7 @@ public class AerolineaIberia implements IGatewayAerolinea {
 
 
 	@Override
-	public boolean reservarVuelo(VueloDTO vuelo, String nombre, int plazas) {
+	public boolean reservarVuelo(Vuelo vuelo, String nombre, int plazas) {
 		// TODO Auto-generated method stub
 
 		boolean reserva;
@@ -102,11 +121,35 @@ public class AerolineaIberia implements IGatewayAerolinea {
 			reserva = false;
 		}
 		
+		System.out.println(reserva);
 		// TODO Auto-generated method stub
 		return reserva;
 	
 	}
 
+	public static void main(String[] args) {
+		AerolineaIberia ob=new AerolineaIberia();
+		System.out.println("Metodo getallvuelos");
+		System.out.println("---------------------");
+		ob.getAllVuelos();
+		System.out.println("---------------------");
+		
+		System.out.println("Metodo buscarvuelo");
+		ob.buscarVuelo("BCN", "BIO", "20/01/19" , 4);
+		System.out.println("---------------------");
+		
+		System.out.println("Metodo buscarvuelodesdeorigen");
+		ob.buscarVuelosDesdeOrigen("BIO", "20/01/19", 30);
+		
+		System.out.println("---------------------");
+		System.out.println("Metodo Reserva");
+		System.out.println("Asientas antes de reserva: " +ob.v1.getAsientosDisponibles());
+		ob.reservarVuelo(ob.v1, "Yeray", 5);
+		System.out.println("Asientas despues de reserva: " +ob.v1.getAsientosDisponibles());
+		
+
+		
+	}
 
 	
 	

@@ -4,6 +4,8 @@
 	<property name="source.dir" location="src"/>
    	<property name="build.dir" location="bin"/>
 	<property name="classpath" location="${build.dir}"/>
+	<property name="server.Name" value="Iberia"/>
+	<property name="export.file" value="Aerolinea_Iberia.jar"/>
 
 
 	

@@ -2,7 +2,7 @@ package iberia;
 
 import java.io.Serializable;
 
-public class VueloDTO implements Serializable{
+public class Vuelo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -16,13 +16,13 @@ public class VueloDTO implements Serializable{
 	
 
 	
-	public VueloDTO() {
+	public Vuelo() {
 		
 	}
 	
 	
 	
-	public VueloDTO(String nomAerolinea, String aeropuertoDestino, String aeropuertoOrigen, String fecha,
+	public Vuelo(String nomAerolinea, String aeropuertoDestino, String aeropuertoOrigen, String fecha,
 			int numAsientos) {
 		super();
 		this.nomAerolinea = nomAerolinea;

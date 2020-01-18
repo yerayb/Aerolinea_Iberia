@@ -22,6 +22,8 @@ public class AerolineaIberia implements IAerolineaIberia {
 
 	@Override
 	public ArrayList<VueloDTO> getAllVuelos() {
+		System.out.println("Request: +getAllVuelos()");
+		
 		VueloIberia v1 = new VueloIberia();
 		VueloIberia v2 = new VueloIberia();
 		VueloIberia v3 = new VueloIberia();
@@ -78,11 +80,13 @@ public class AerolineaIberia implements IAerolineaIberia {
 	@Override
 	public VueloDTO buscarVuelo(String aeropuertoDestino, String aeropuertoOrigen, String fecha, int asientos) {
 		// TODO Auto-generated method stub
+		System.out.println("Request: +buscarVuelo()");
 		int i = 0;
 		VueloDTO vueloEncontrado = null;
 		for(i=0;i<vuelos.size();i++) {
 			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getAeropuertoDestino() == aeropuertoDestino && vuelos.get(i).getFecha() == fecha && vuelos.get(i).getAsientosDisponibles() >= asientos) {
 				vueloEncontrado = vuelos.get(i);
+				System.out.println("Vuelo encontrado");
 			}
 			
 		}
@@ -94,6 +98,7 @@ public class AerolineaIberia implements IAerolineaIberia {
 	@Override
 	public ArrayList<VueloDTO> buscarVuelosDesdeOrigen(String aeropuertoOrigen, String fecha, int asientos) {
 		// TODO Auto-generated method stub
+		System.out.println("Request: +buscarVuelosDesdeOrigen()");
 		ArrayList<VueloDTO> vuelosEncontrados = new ArrayList<VueloDTO>();
 		int i;
 		for(i=0;i<vuelos.size();i++) {
@@ -118,6 +123,7 @@ public class AerolineaIberia implements IAerolineaIberia {
 	@Override
 	public boolean reservarVuelo(String codVuelo, String nombre, int plazas) {
 		// TODO Auto-generated method stub
+		System.out.println("Request: +reservarVuelo()");
 
 		boolean reserva;
 		VueloDTO v = null;
@@ -134,9 +140,11 @@ public class AerolineaIberia implements IAerolineaIberia {
 		int comprobarReserva = plazasdisponibles-plazas;
 		if(comprobarReserva>=0) {
 			v.setAsientosDisponibles(v.getAsientosDisponibles()-plazas);
+			System.out.println("Vuelo reservado");
 			reserva = true;
 		}
 		else {
+			System.out.println("Vuelo no reservado");
 			reserva = false;
 		}
 		

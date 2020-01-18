@@ -1,11 +1,9 @@
-package iberia;
+package server.data.dto;
 
 import java.io.Serializable;
 
-public class Vuelo implements Serializable{
+public class VueloDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private String nomAerolinea;
 	private String numVuelo;
 	private String aeropuertoDestino;
@@ -14,51 +12,17 @@ public class Vuelo implements Serializable{
 	private int numAsientos;
 	private int asientosDisponibles;
 	
-
-	
-	public Vuelo() {
-		
-	}
-	
-	
-	
-	public Vuelo(String nomAerolinea, String aeropuertoDestino, String aeropuertoOrigen, String fecha,
-			int numAsientos) {
-		super();
-		this.nomAerolinea = nomAerolinea;
-		this.aeropuertoDestino = aeropuertoDestino;
-		this.aeropuertoOrigen = aeropuertoOrigen;
-		this.fecha = fecha;
-		this.numAsientos = numAsientos;
-	}
-
-
-
-	public void testToString() {
-		System.out.println(aeropuertoDestino);
-		System.out.println(aeropuertoOrigen);
-		System.out.println(fecha);
-		System.out.println(numAsientos);
-		System.out.println(nomAerolinea);
-	}
-
 	public String getNomAerolinea() {
 		return nomAerolinea;
 	}
-
-
-
 	public void setNomAerolinea(String nomAerolinea) {
 		this.nomAerolinea = nomAerolinea;
 	}
-
-
-
-	public int getNumAsientos() {
-		return numAsientos;
+	public String getNumVuelo() {
+		return numVuelo;
 	}
-	public void setNumAsientos(int numAsientos) {
-		this.numAsientos = numAsientos;
+	public void setNumVuelo(String numVuelo) {
+		this.numVuelo = numVuelo;
 	}
 	public String getAeropuertoDestino() {
 		return aeropuertoDestino;
@@ -78,32 +42,20 @@ public class Vuelo implements Serializable{
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
-
-
-	public String getNumVuelo() {
-		return numVuelo;
+	public int getNumAsientos() {
+		return numAsientos;
 	}
-
-
-
-	public void setNumVuelo(String numVuelo) {
-		this.numVuelo = numVuelo;
+	public void setNumAsientos(int numAsientos) {
+		this.numAsientos = numAsientos;
 	}
-
-
-
 	public int getAsientosDisponibles() {
 		return asientosDisponibles;
 	}
-
-
-
 	public void setAsientosDisponibles(int asientosDisponibles) {
 		this.asientosDisponibles = asientosDisponibles;
 	}
 	
 	
-	
+
 
 }

@@ -1,4 +1,4 @@
-package Socket;
+package server.remote;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -6,8 +6,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
-import iberia.AerolineaIberia;
-import iberia.Vuelo;
+import server.data.VueloIberia;
+import server.data.dto.VueloDTO;
 
 public class IberiaService extends Thread {
 
@@ -43,7 +43,7 @@ public class IberiaService extends Thread {
 			System.out.println("   - IberiaService - Received data from '" + tcpSocket.getInetAddress().getHostAddress()
 					+ ":" + tcpSocket.getPort() + "' -> '" + data + "'");
 			
-			Vuelo vuelos = fDb.buscarVuelo(destino, origen, fecha, asientos);
+			VueloDTO vuelos = fDb.buscarVuelo(destino, origen, fecha, asientos);
 			String r = "";
 			r = r + vuelos.toString() + "#";
 			

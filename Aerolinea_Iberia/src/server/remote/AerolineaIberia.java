@@ -158,6 +158,22 @@ public class AerolineaIberia implements IAerolineaIberia {
 		
 		
 	}
+	
+	@Override
+	public VueloDTO getVuelo(String codVuelo) {
+		// TODO Auto-generated method stub
+		VueloDTO v = null;
+		for(int i=0;i<vuelos.size();i++) {
+			if(vuelos.get(i).getNumVuelo()==codVuelo) {
+				v = vuelos.get(i);
+			}
+		}
+		
+		System.out.println("CodVuelo: " +v.getNumVuelo() +" origen: " +v.getAeropuertoOrigen());
+		return v;
+		
+	}
+
 
 	public static void main(String[] args) {
 		AerolineaIberia ob=new AerolineaIberia();
@@ -176,12 +192,16 @@ public class AerolineaIberia implements IAerolineaIberia {
 		System.out.println("---------------------");
 		System.out.println("Metodo Reserva");	
 		ob.reservarVuelo("IB625", "Yeray", 5);
-
+		System.out.println("---------------------");
+		ob.getVuelo("IB256");
 		
 
 		
 	}
 
+
+
+	
 	
 	
 	

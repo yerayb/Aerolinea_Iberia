@@ -15,6 +15,7 @@ public class Assembler {
 		v.setNomAerolinea(vr.getNomAerolinea());
 		v.setNumAsientos(vr.getNumAsientos());
 		v.setNumVuelo(vr.getNumVuelo());
+		
 		return v;
 	}
 	

@@ -40,5 +40,7 @@ public interface IAerolineaIberia {
 	 * @return True si se ha reservado con exito, false si no
 	 */
 	public boolean reservarVuelo(String codVuelo, String nombre, int plazas);
+	
+	public VueloDTO getVuelo(String codVuelo);
 
 }

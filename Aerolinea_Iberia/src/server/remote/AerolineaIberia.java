@@ -16,13 +16,6 @@ public class AerolineaIberia implements IAerolineaIberia {
 		super();
 		vuelos = new ArrayList<VueloDTO>();
 		assem = new Assembler();
-	}
-
-
-
-	@Override
-	public ArrayList<VueloDTO> getAllVuelos() {
-		System.out.println("Request: +getAllVuelos()");
 		
 		VueloIberia v1 = new VueloIberia();
 		VueloIberia v2 = new VueloIberia();
@@ -68,7 +61,13 @@ public class AerolineaIberia implements IAerolineaIberia {
 				v4.setAsientosDisponibles(530);
 				v4.setNumAsientos(530);
 				vuelos.add(assem.assemble(v4));
-				
+	}
+
+
+
+	@Override
+	public ArrayList<VueloDTO> getAllVuelos() {
+		System.out.println("Request: +getAllVuelos()");
 		for (VueloDTO vuelo : vuelos) {
 			System.out.println("Aerolinea: " + vuelo.getNomAerolinea() + "\n Origen: " + vuelo.getAeropuertoOrigen()
 					+ "\n Destino: " + vuelo.getAeropuertoDestino());
@@ -79,42 +78,38 @@ public class AerolineaIberia implements IAerolineaIberia {
 
 	@Override
 	public VueloDTO buscarVuelo(String aeropuertoDestino, String aeropuertoOrigen, String fecha, int asientos) {
-		// TODO Auto-generated method stub
 		System.out.println("Request: +buscarVuelo()");
 		int i = 0;
-		VueloDTO vueloEncontrado = null;
-		for(i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getAeropuertoDestino() == aeropuertoDestino && vuelos.get(i).getFecha() == fecha && vuelos.get(i).getAsientosDisponibles() >= asientos) {
-				vueloEncontrado = vuelos.get(i);
+		for (i = 0; i < vuelos.size(); i++) {
+			if (	vuelos.get(i).getAeropuertoOrigen().equals(aeropuertoOrigen)
+					&& vuelos.get(i).getAeropuertoDestino().equals(aeropuertoDestino) 
+					&& vuelos.get(i).getFecha().equals(fecha) 
+					&& vuelos.get(i).getAsientosDisponibles() >= asientos) {
+				
 				System.out.println("Vuelo encontrado");
+				return vuelos.get(i);
 			}
-			
+
 		}
-		System.out.println("Origen: " +vueloEncontrado.getAeropuertoOrigen() +" Destino: " +vueloEncontrado.getAeropuertoDestino() +" Numero de vuelo: " +vueloEncontrado.getNumVuelo() );
-		return vueloEncontrado;
-		
+		return null;
+
 	}
 
 	@Override
 	public ArrayList<VueloDTO> buscarVuelosDesdeOrigen(String aeropuertoOrigen, String fecha, int asientos) {
-		// TODO Auto-generated method stub
 		System.out.println("Request: +buscarVuelosDesdeOrigen()");
+		
 		ArrayList<VueloDTO> vuelosEncontrados = new ArrayList<VueloDTO>();
 		int i;
-		for(i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getAeropuertoOrigen()==aeropuertoOrigen && vuelos.get(i).getFecha() == fecha &&vuelos.get(i).getAsientosDisponibles() >= asientos ) {
-				vuelosEncontrados.add(vuelos.get(i));
+		for (i = 0; i < vuelos.size(); i++) {
+			if (	vuelos.get(i).getAeropuertoOrigen().equals(aeropuertoOrigen) 
+					&& vuelos.get(i).getFecha().equals(fecha)
+					&& vuelos.get(i).getAsientosDisponibles() >= asientos) {
 				
+				vuelosEncontrados.add(vuelos.get(i));
 			}
-			
 		}
-		
-		for (int j = 0; j < vuelosEncontrados.size(); j++) {
-			System.out.println("Numero de vuelo: " +vuelosEncontrados.get(j).getNumVuelo());
-		}
-			
-		
-		
+
 		return vuelosEncontrados;
 	}
 
@@ -122,56 +117,43 @@ public class AerolineaIberia implements IAerolineaIberia {
 
 	@Override
 	public boolean reservarVuelo(String codVuelo, String nombre, int plazas) {
-		// TODO Auto-generated method stub
 		System.out.println("Request: +reservarVuelo()");
 
 		boolean reserva;
 		VueloDTO v = null;
+		
 		for(int i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getNumVuelo()==codVuelo) {
+			if(vuelos.get(i).getNumVuelo().equals(codVuelo)) {
 				v = vuelos.get(i);
 			}
 			
 		}
 		
-		System.out.println("Asientos disponibles: " +v.getAsientosDisponibles());
-		
 		int plazasdisponibles = v.getAsientosDisponibles();
-		int comprobarReserva = plazasdisponibles-plazas;
-		if(comprobarReserva>=0) {
-			v.setAsientosDisponibles(v.getAsientosDisponibles()-plazas);
-			System.out.println("Vuelo reservado");
+		int comprobarReserva = plazasdisponibles - plazas;
+		if (comprobarReserva >= 0) {
+			v.setAsientosDisponibles(v.getAsientosDisponibles() - plazas);
 			reserva = true;
-		}
-		else {
+			System.out.println("Vuelo reservado");
+		} else {
 			System.out.println("Vuelo no reservado");
 			reserva = false;
 		}
 		
-		System.out.println("Asientos disponibles: " +v.getAsientosDisponibles());
-		
-		System.out.println(reserva);
+		// TODO Auto-generated method stub
 		return reserva;
-		
-		
-		
-		
-		
 	}
 	
 	@Override
 	public VueloDTO getVuelo(String codVuelo) {
-		// TODO Auto-generated method stub
 		VueloDTO v = null;
 		for(int i=0;i<vuelos.size();i++) {
-			if(vuelos.get(i).getNumVuelo()==codVuelo) {
+			if(vuelos.get(i).getNumVuelo().equals(codVuelo)) {
 				v = vuelos.get(i);
 			}
 		}
 		
-		System.out.println("CodVuelo: " +v.getNumVuelo() +" origen: " +v.getAeropuertoOrigen());
 		return v;
-		
 	}
 
 

@@ -12,6 +12,7 @@ public class VueloDTO implements Serializable {
 	private String fecha;
 	private int numAsientos;
 	private int asientosDisponibles;
+	private int precio;
 	
 	public String getNomAerolinea() {
 		return nomAerolinea;
@@ -55,6 +56,21 @@ public class VueloDTO implements Serializable {
 	public void setAsientosDisponibles(int asientosDisponibles) {
 		this.asientosDisponibles = asientosDisponibles;
 	}
+	
+	
+	public int getPrecio() {
+		return precio;
+	}
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nomAerolinea + ";" + numVuelo + ";" + aeropuertoDestino + ";" + aeropuertoOrigen + ";" + fecha + ";" + numAsientos + ";" + asientosDisponibles + ";" + precio;
+
+	}
+	
 	
 	
 

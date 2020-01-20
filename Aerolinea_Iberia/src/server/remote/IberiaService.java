@@ -18,6 +18,7 @@ public class IberiaService extends Thread {
 	private AerolineaIberia fDb;
 
 	public IberiaService(Socket socket) {
+		
 		try {
 			this.tcpSocket = socket;
 			this.fDb = new AerolineaIberia();

@@ -2,9 +2,8 @@ package server.data;
 
 import java.io.Serializable;
 
-public class VueloIberia implements Serializable{
+public class VueloIberia {
 
-	private static final long serialVersionUID = 1L;
 	
 	private String nomAerolinea;
 	private String numVuelo;

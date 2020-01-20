@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import server.data.VueloIberia;
 import server.data.dto.VueloDTO;
@@ -43,11 +44,12 @@ public class IberiaService extends Thread {
 			System.out.println("   - IberiaService - Received data from '" + tcpSocket.getInetAddress().getHostAddress()
 					+ ":" + tcpSocket.getPort() + "' -> '" + data + "'");
 			
-			VueloDTO vuelos = fDb.buscarVuelo(destino, origen, fecha, asientos);
+			VueloDTO vuelo = fDb.buscarVuelo(destino, origen, fecha, asientos);
 			String r = "";
-			r = r + vuelos.toString() + "#";
+			r = r + vuelo.toString() + "#";
 			
-		
+			ArrayList<VueloDTO> vuelos =  fDb.getAllVuelos();
+			
 
 			// Send response to the client
 			this.out.writeUTF(r +"");

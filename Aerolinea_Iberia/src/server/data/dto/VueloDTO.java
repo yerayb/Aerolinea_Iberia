@@ -3,7 +3,8 @@ package server.data.dto;
 import java.io.Serializable;
 
 public class VueloDTO implements Serializable {
-
+	private static final long serialVersionUID = 8829744013340172113L;
+	
 	private String nomAerolinea;
 	private String numVuelo;
 	private String aeropuertoDestino;
